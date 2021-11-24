@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy1
+  labels:
+     app: app-v1
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: app-v1
+  template:
+    metadata:
+      labels:
+        app: app-v1
+    spec:
+      imagePullSecrets:
+      - name: my-key
+      containers:
+      - name: sample-ctr
+        image: 360717660714.dkr.ecr.ap-south-1.amazonaws.com/php-app:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
